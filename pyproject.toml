@@ -1,0 +1,15 @@
+[project]
+name = "cheep"
+authors = [{name = "Viven Iyer", email = "viveniyer304@gmail.com"}]
+version = "0.1.0"
+requires-python = ">=3.9"
+dependencies = [
+    "transformers",
+    "requests",
+    "bs4",
+    "nltk",
+    "torch",
+]
+
+[tool.setuptools.packages]
+find = {}
