@@ -1,8 +1,5 @@
-from model import DialoGPT
-
-def main():    
-    dialo_gpt = DialoGPT()
-    dialo_gpt.dialogue_loop()
+def main():
+    print("Check pyproject.toml for scripts")
 
 if __name__ == "__main__":
     main()

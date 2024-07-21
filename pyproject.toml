@@ -5,11 +5,12 @@ version = "0.1.0"
 requires-python = ">=3.9"
 dependencies = [
     "transformers",
-    "requests",
-    "bs4",
-    "nltk",
+    "scikit-learn",
     "torch",
 ]
 
 [tool.setuptools.packages]
 find = {}
+
+[project.scripts]
+classifier-cli = "src.cli.classifier:run"

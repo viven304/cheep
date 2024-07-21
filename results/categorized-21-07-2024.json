@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "word": "coffee",
+            "category": 0
+        },
+        {
+            "word": "tea",
+            "category": 0
+        },
+        {
+            "word": "keyboard",
+            "category": 1
+        },
+        {
+            "word": "mouse",
+            "category": 1
+        }
+    ]
+}
