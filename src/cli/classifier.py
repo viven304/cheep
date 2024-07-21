@@ -2,14 +2,15 @@ from src.models.bert import CategoriesClassifierBERT
 import argparse
 import sys
 
+
 def setup_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog='Category classifier', 
-        description="Create 4 categories out of the words you provide"
+        prog="Category classifier",
+        description="Create 4 categories out of the words you provide",
     )
     parser.add_argument("words", nargs="*")
     return parser
-    
+
 
 def run():
     parser = setup_parser()
