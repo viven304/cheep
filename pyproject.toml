@@ -7,6 +7,10 @@ dependencies = [
     "transformers",
     "scikit-learn",
     "torch",
+    "Flask",
+    "flask_cors",
+    "attrs",
+    "cattrs"
 ]
 
 [tool.setuptools.packages]
@@ -14,3 +18,4 @@ find = {}
 
 [project.scripts]
 classifier-cli = "src.cli.classifier:run"
+cheep-server = "src.server.server:run"
