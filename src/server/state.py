@@ -34,6 +34,7 @@ class CheepPuzzleState:
     def verify_selected_words(self, selected_words: List[Word]) -> bool:
         for category in self.unsolved_categories:
             if category.words == selected_words:
+                self.mark_correct(category)
                 return True
         return False
 
