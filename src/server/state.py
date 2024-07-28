@@ -1,6 +1,6 @@
 from src.server.word import Word
 from src.server.category import Category
-from typing import List
+from typing import List, Tuple
 from attrs import define
 
 
@@ -31,12 +31,16 @@ class CheepPuzzleState:
         """
         return
 
-    def verify_selected_words(self, selected_words: List[Word]) -> bool:
+    def verify_selected_words(self, selected_words: List[Word]) -> Tuple[Category, bool]:
         for category in self.unsolved_categories:
             if category.words == selected_words:
                 self.mark_correct(category)
-                return True
-        return False
+                return category, True
+
+        for category in self.solved_categories:
+            if category.words == selected_words:
+                return category, False
+        return None, False
 
     def mark_correct(self, selected_category):
         """

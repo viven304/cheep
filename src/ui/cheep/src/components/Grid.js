@@ -8,6 +8,7 @@ class Grid extends Component {
     this.state = {
         words: [],
         categories: [],
+        colorMap: [],
         selection: [],
     };
   }
@@ -23,7 +24,8 @@ class Grid extends Component {
       const data = await response.json();
       const words = data["words"];
       const categories = data["unsolved_categories"];
-      this.setState({ words, categories });
+      const colorMap = new Array(words.length).fill(null);
+      this.setState({ words, categories, colorMap });
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -41,13 +43,37 @@ class Grid extends Component {
         });
         const content = await rawResponse.json();
         if (content["validation_result"]) {
-          alert("Yippeeee");
+          alert(`Yippeeee. It is a part of ${content["category"].name}`);
+          this.colorWords();
+          this.clearSelection();
+        } else if (content["category"]) {
+          alert(`Already tried and the answer is ${content["category"].name}`);
+          this.colorWords();
+          this.clearSelection();
         } else {
-          alert("Booooooo");
+          alert("Booooo that's wrong");
+          this.clearSelection()
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+  }
+
+  colorWords() {
+    this.state.selection.forEach((selection, index) => {
+      const idx = this.state.words.findIndex(word => selection.data === word.data);
+      if (idx >= 0) {
+        const currentState = this.state;
+        currentState.colorMap[idx] = "bg-success";
+        this.setState(currentState);
+      }
+    });
+  }
+  
+  clearSelection() {
+    const currentState = this.state;
+    currentState.selection = [];
+    this.setState(currentState);
   }
 
   toggleSelection(word) {
@@ -65,7 +91,7 @@ class Grid extends Component {
           <div className="container-fluid gap-3 text-center justify-content-md-center">
               <div className="row justify-content-lg-center">
                   {this.state.words.map((word, index) => (
-                      <Word toggleSelection={this.toggleSelection.bind(this)} key={index} word={word} category={this.getCategoryForWord(word, this.state.categories)}/>
+                      <Word toggleSelection={this.toggleSelection.bind(this)} key={index} word={word} category={this.getCategoryForWord(word, this.state.categories)} color={this.state.colorMap[index]}/>
                   ))}
               </div>
               <div className='row p-2'>
