@@ -11,5 +11,8 @@ class Word:
     def __eq__(self, other):
         return self.data == other.data
 
-    def __str__(self):
+    def __repr__(self):
         return self.data
+
+    def __lt__(self, other):
+        return self.data < other.data

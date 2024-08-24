@@ -59,12 +59,22 @@ class Grid extends Component {
       }
   }
 
+  getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   colorWords() {
+    let colorForCategory = this.getRandomColor()
     this.state.selection.forEach((selection, index) => {
       const idx = this.state.words.findIndex(word => selection.data === word.data);
       if (idx >= 0) {
         const currentState = this.state;
-        currentState.colorMap[idx] = "bg-success";
+        currentState.colorMap[idx] = colorForCategory;
         this.setState(currentState);
       }
     });
@@ -85,15 +95,25 @@ class Grid extends Component {
     }
   }
 
+  wordsInGroupsOfFours() {
+    const wordsInGroups = [];
+    for (let i=0; i<16-1; i+=4) {
+      wordsInGroups.push(this.state.words.slice(i, i+4));
+    }
+    return wordsInGroups;
+  }
+
   render() {
     return (
         <div className='game-board'>
           <div className="container-fluid gap-3 text-center justify-content-md-center">
-              <div className="row justify-content-lg-center">
-                  {this.state.words.map((word, index) => (
-                      <Word toggleSelection={this.toggleSelection.bind(this)} key={index} word={word} category={this.getCategoryForWord(word, this.state.categories)} color={this.state.colorMap[index]}/>
+                  {this.wordsInGroupsOfFours().map((words, index_of_row) => (
+                      <div key={index_of_row} className="row justify-content-lg-center">
+                          {words.map((word, index_of_word) => (
+                            <Word toggleSelection={this.toggleSelection.bind(this)} key={index_of_row*4 + index_of_word} word={word} category={this.getCategoryForWord(word, this.state.categories)} color={this.state.colorMap[index_of_row*4 + index_of_word]}/>
+                          ))}
+                      </div>
                   ))}
-              </div>
               <div className='row p-2'>
                 <div className='col'>
                   <button onClick={this.validateSelection} className='btn btn-outline-dark' type='submit'>Submit</button>

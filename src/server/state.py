@@ -33,7 +33,7 @@ class CheepPuzzleState:
 
     def verify_selected_words(self, selected_words: List[Word]) -> Tuple[Category, bool]:
         for category in self.unsolved_categories:
-            if category.words == selected_words:
+            if sorted(category.words) == sorted(selected_words):
                 self.mark_correct(category)
                 return category, True
 
@@ -50,3 +50,11 @@ class CheepPuzzleState:
             if category.name == selected_category.name:
                 self.solved_categories.append(category)
                 self.unsolved_categories.remove(category)
+
+    def reset(self):
+        """
+        Reset the puzzle state to the default starting state
+        """
+        total_categories = self.solved_categories + self.unsolved_categories
+        self.solved_categories = []
+        self.unsolved_categories = total_categories

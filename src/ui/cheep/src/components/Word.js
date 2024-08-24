@@ -21,7 +21,7 @@ class Word extends Component {
 
   render() {
     return (
-        <button onClick={this.toggleActive} className={`col col-lg-2 m-2 btn btn-light ${this.state.isActive ? 'active' : ''} ${this.props.color ? this.props.color : ''}`}>
+        <button onClick={this.toggleActive} className={`col-lg-2 m-2 btn btn-light ${this.state.isActive ? 'active' : ''}`} style={{backgroundColor: this.props.color}}>
             {this.state.word.data}
         </button>
       );
