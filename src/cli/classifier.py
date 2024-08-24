@@ -22,4 +22,4 @@ def run():
     if len(opts.words) % 4 != 0:
         raise ValueError("We need multiples of 4s number of words to classify")
     model = CategoriesClassifierBERT()
-    model.word_categorizer(opts.words)
+    model.cli_word_categorizer(opts.words)

@@ -10,7 +10,9 @@ dependencies = [
     "Flask",
     "flask_cors",
     "attrs",
-    "cattrs"
+    "cattrs",
+    "selenium",
+    "datasets"
 ]
 
 [tool.setuptools.packages]
@@ -18,4 +20,5 @@ find = {}
 
 [project.scripts]
 classifier-cli = "src.cli.classifier:run"
+train-cli = "src.cli.train:run"
 cheep-server = "src.server.server:run"
