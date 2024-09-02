@@ -43,15 +43,15 @@ class Grid extends Component {
         });
         const content = await rawResponse.json();
         if (content["validation_result"]) {
-          alert(`Yippeeee. It is a part of ${content["category"].name}`);
+          // alert(`Yippeeee. It is a part of ${content["category"].name}`);
           this.colorWords();
           this.clearSelection();
         } else if (content["category"]) {
-          alert(`Already tried and the answer is ${content["category"].name}`);
+          // alert(`Already tried and the answer is ${content["category"].name}`);
           this.colorWords();
           this.clearSelection();
         } else {
-          alert("Booooo that's wrong");
+          // alert("Booooo that's wrong");
           this.clearSelection()
         }
       } catch (error) {
@@ -116,7 +116,7 @@ class Grid extends Component {
                   ))}
               <div className='row p-2'>
                 <div className='col'>
-                  <button onClick={this.validateSelection} className='btn btn-outline-dark' type='submit'>Submit</button>
+                  <button onClick={this.validateSelection} className='submit-btn' type='submit'>Submit</button>
                 </div>
               </div>
           </div>
