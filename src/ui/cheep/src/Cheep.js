@@ -10,7 +10,7 @@ class Cheep extends Component {
         <div className="lightning">
           <div className="noisy m-4">
             <span>july. 2024</span>
-            Cheep
+            C.H.E.E.P
           </div>
           <div className="noisy m-4">
             the game

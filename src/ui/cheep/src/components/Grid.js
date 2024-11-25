@@ -87,12 +87,14 @@ class Grid extends Component {
   }
 
   toggleSelection(word) {
-    if (this.state.selection.includes(word)) {
-      const idx = this.state.selection.indexOf(word);
-      this.state.selection.splice(idx, 1);
+    const state = this.state;
+    if (state.selection.includes(word)) {
+      const idx = state.selection.indexOf(word);
+      state.selection.splice(idx, 1);
     } else {
-      this.state.selection.push(word);
+      state.selection.push(word);
     }
+    this.setState(state);
   }
 
   wordsInGroupsOfFours() {
@@ -102,6 +104,9 @@ class Grid extends Component {
     }
     return wordsInGroups;
   }
+  isWordActive(word) {
+    return this.state.selection.includes(word);
+  }
 
   render() {
     return (
@@ -110,7 +115,7 @@ class Grid extends Component {
                   {this.wordsInGroupsOfFours().map((words, index_of_row) => (
                       <div key={index_of_row} className="row justify-content-lg-center">
                           {words.map((word, index_of_word) => (
-                            <Word toggleSelection={this.toggleSelection.bind(this)} key={index_of_row*4 + index_of_word} word={word} category={this.getCategoryForWord(word, this.state.categories)} color={this.state.colorMap[index_of_row*4 + index_of_word]}/>
+                            <Word isActive={this.isWordActive(word)} toggleSelection={this.toggleSelection.bind(this)} key={index_of_row*4 + index_of_word} word={word} category={this.getCategoryForWord(word, this.state.categories)} color={this.state.colorMap[index_of_row*4 + index_of_word]}/>
                           ))}
                       </div>
                   ))}
